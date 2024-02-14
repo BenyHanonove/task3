@@ -7,11 +7,11 @@
 }
 
 .base-button {
-  background-color: #fff;
+  background-color: #457ace;
   border: solid #e2e2e2;
   border-radius: 1.5rem;
   box-sizing: border-box;
-  color: #0d172a;
+  color: #e2e2e2;
   cursor: pointer;
   display: inline-block;
   font-size: 1.1rem;
@@ -29,6 +29,6 @@
 }
 
 .base-button:hover {
-  background-color: #457ace;
+  background-color: #17376b;
   color: #fff;
 }

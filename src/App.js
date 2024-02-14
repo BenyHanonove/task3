@@ -1,10 +1,40 @@
+import React, { useEffect, useState } from "react";
 import "./App.css";
-import RegisterForm from "./components/forms/registerForm/register-form";
+
+// Import Components
+import Register from "./components/register/register";
+import Login from "./components/login/login";
+import EditDetails from "./components/editDetails/edit-details";
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [isBusy, setBusy] = useState(true);
+
+  useEffect(() => {
+    const userData = sessionStorage.getItem("loggedInUser");
+    if (userData) {
+      const parseUser = JSON.parse(userData);
+      setUser(parseUser);
+    }
+    // Set isBusy to false after useEffect completes
+    setBusy(false);
+  }, []);
+
+  // Render a loading state if isBusy is true
+  if (isBusy) {
+    return null;
+  }
+
   return (
     <div className="App">
-      <RegisterForm />
+      {user === null ? (
+        <div>
+          <Login />
+          <Register />
+        </div>
+      ) : (
+        <EditDetails userData={user} />
+      )}
     </div>
   );
 }

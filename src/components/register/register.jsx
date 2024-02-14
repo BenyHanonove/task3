@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import "./register-form.css";
+import "./register.css";
 
 //Components for form
-import TextInput from "../../inputs/textInput/text-input.jsx";
-import BaseButton from "../../buttons/baseButton/base-button.jsx";
-import PasswordInput from "../../inputs/passwordInput/password-input.jsx";
-import ImageInput from "../../inputs/imageInput/image-input.jsx";
-import AutoCompleteInput from "../../inputs/autoCompleteInput/auto-complete-input.jsx";
-import HebrewTextInput from "../../inputs/hebrewTextInput/hebrew-text-input.jsx";
-import NumberInput from "../../inputs/numberInput/number-input.jsx";
-import DateInput from "../../inputs/dateInput/date-input.jsx";
+import TextInput from "../inputs/textInput/text-input.jsx";
+import BaseButton from "../buttons/baseButton/base-button.jsx";
+import PasswordInput from "../inputs/passwordInput/password-input.jsx";
+import ImageInput from "../inputs/imageInput/image-input.jsx";
+import AutoCompleteInput from "../inputs/autoCompleteInput/auto-complete-input.jsx";
+import HebrewTextInput from "../inputs/hebrewTextInput/hebrew-text-input.jsx";
+import NumberInput from "../inputs/numberInput/number-input.jsx";
+import DateInput from "../inputs/dateInput/date-input.jsx";
 
 //Function to handel the validation for complex tasks
-import { ValidateRegisterForm } from "../../../utils/formValidation.js";
+import { ValidateRegisterForm } from "../../utils/formValidation.js";
+import { registerUser } from "../../utils/storageHandler.js";
 
-export default function RegisterForm() {
+export default function Register() {
   //State to handel the data inside the form
   const [registerData, setRegisterData] = useState({
     username: "",
@@ -42,7 +43,7 @@ export default function RegisterForm() {
   };
 
   //Function to handel the submit of register form
-  const formSubmitHandler = (event) => {
+  const formSubmitHandler = async (event) => {
     event.preventDefault();
     setErrorMessage("");
 
@@ -50,7 +51,8 @@ export default function RegisterForm() {
     if (formCheck !== null) {
       setErrorMessage(formCheck);
     } else {
-      //Logic to save in local storage
+      await registerUser(registerData);
+      window.location.reload();
     }
   };
 
@@ -68,6 +70,7 @@ export default function RegisterForm() {
             registerDataUpdate("image", value);
           }}
         />
+        <h2 className="form-header">Register</h2>
 
         <TextInput
           label="Username"
@@ -77,7 +80,14 @@ export default function RegisterForm() {
             registerDataUpdate("username", value);
           }}
         />
-
+        <TextInput
+          label="Email"
+          hintText="Enter Email address..."
+          value={registerData.email}
+          setValue={(value) => {
+            registerDataUpdate("email", value);
+          }}
+        />
         <TextInput
           label="First Name"
           hintText="Enter First Name..."
@@ -94,14 +104,6 @@ export default function RegisterForm() {
           value={registerData.lastName}
           setValue={(value) => {
             registerDataUpdate("lastName", value);
-          }}
-        />
-        <TextInput
-          label="Email"
-          hintText="Enter Email address..."
-          value={registerData.email}
-          setValue={(value) => {
-            registerDataUpdate("email", value);
           }}
         />
         <PasswordInput

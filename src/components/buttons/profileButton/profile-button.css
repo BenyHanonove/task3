@@ -1,0 +1,13 @@
+.profile-button {
+  color: white;
+  background-color: var(--button-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  direction: rtl;
+}
+
+.profile-button:hover {
+  opacity: 0.8;
+}

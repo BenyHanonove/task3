@@ -26,7 +26,7 @@ export default function PasswordInput({ label, hintText, value, setValue }) {
         />
         {value && (
           <button
-            class="password-button "
+            className="password-button "
             type="button"
             onClick={toggleShowPassword}
             style={{}}

@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import "./image-input.css";
 
-export default function ImageInput({ setValue }) {
-  const [previewUrl, setPreviewUrl] = useState("");
+export default function ImageInput({ setValue, preImage }) {
+  const [previewUrl, setPreviewUrl] = useState(preImage || "");
   const fileInputRef = useRef(null);
 
   const handleFileChange = (event) => {
@@ -19,6 +19,10 @@ export default function ImageInput({ setValue }) {
       const imageUrl = URL.createObjectURL(file); // Create URL for preview
       setPreviewUrl(imageUrl);
       setValue(file);
+    } else {
+      // Clear preview if no file is selected
+      setPreviewUrl("");
+      setValue(null);
     }
   };
 
@@ -28,27 +32,28 @@ export default function ImageInput({ setValue }) {
 
   return (
     <div className="image-input-container">
-      <div className="image-preview-container">
+      <div htmlFor="image-upload" className="image-preview-container">
         {previewUrl ? (
           <img
             src={previewUrl}
             alt="Profile Preview"
             className="preview-image"
+            onClick={handleLabelClick}
           />
         ) : (
           <div className="default-profile-image" onClick={handleLabelClick}>
-            <p>Profile Image</p>
+            <p>Select Image</p>
           </div>
         )}
+        <input
+          type="file"
+          id="image-upload"
+          onChange={handleFileChange}
+          accept=".jpg,.jpeg"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+        />
       </div>
-      <input
-        type="file"
-        id="image-upload"
-        onChange={handleFileChange}
-        accept=".jpg,.jpeg"
-        ref={fileInputRef}
-        style={{ display: "none" }}
-      />
     </div>
   );
 }

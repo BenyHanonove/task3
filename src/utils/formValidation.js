@@ -84,6 +84,12 @@ export const ValidateRegisterForm = (registerData) => {
     return usernameCheck;
   }
 
+  // Check if the email the user inserted is valid
+  const emailCheck = validateEmail(registerData.email);
+  if (emailCheck !== null) {
+    return emailCheck;
+  }
+
   // Check if the length of the first name is between 3 and 60 characters
   if (registerData.firstName.length < 3 || registerData.firstName.length > 60) {
     return "First name must be between 3 and 60 characters long.";
@@ -92,12 +98,6 @@ export const ValidateRegisterForm = (registerData) => {
   // Check if the length of the first name is between 3 and 60 characters
   if (registerData.lastName.length < 3 || registerData.lastName.length > 60) {
     return "Last name must be between 3 and 60 characters long.";
-  }
-
-  // Check if the email the user inserted is valid
-  const emailCheck = validateEmail(registerData.email);
-  if (emailCheck !== null) {
-    return emailCheck;
   }
 
   // Check if the password the user inserted is valid
