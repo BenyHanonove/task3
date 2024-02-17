@@ -1,0 +1,32 @@
+.admin-dashboard {
+  padding: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+td,
+th {
+  border: 1px solid #9a9da0;
+  text-align: left;
+  padding: 8px;
+  border-radius: 2px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+svg {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+svg:hover {
+  transform: scale(1.2);
+}

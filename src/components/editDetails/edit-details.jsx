@@ -1,3 +1,4 @@
+// Import useState and useEffect
 import React, { useState } from "react";
 import "./edit-details.css";
 
@@ -8,12 +9,13 @@ import AutoCompleteInput from "../inputs/autoCompleteInput/auto-complete-input.j
 import HebrewTextInput from "../inputs/hebrewTextInput/hebrew-text-input.jsx";
 import NumberInput from "../inputs/numberInput/number-input.jsx";
 import DateInput from "../inputs/dateInput/date-input.jsx";
+import PasswordInput from "../inputs/passwordInput/password-input.jsx";
 
 // Function to handle user update
 import { updateUser } from "../../utils/storageHandler.js";
 import BaseButton from "../buttons/baseButton/base-button.jsx";
 
-export default function EditDetails({ userData }) {
+export default function EditDetails({ userData, setShow, setUpdate }) {
   // State to handle edited user data
   const [editedUserData, setEditedUserData] = useState(userData);
 
@@ -26,10 +28,12 @@ export default function EditDetails({ userData }) {
   };
 
   // Function to handle form submission
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    await updateUser(editedUserData);
-    window.location.reload();
+    updateUser(editedUserData);
+    // Call setUpdate with the updated user data
+    setUpdate(editedUserData);
+    setShow(false);
   };
 
   return (
@@ -45,6 +49,14 @@ export default function EditDetails({ userData }) {
           label="Username"
           value={editedUserData.username}
           setValue={(value) => handleUserDataUpdate("username", value)}
+        />
+        <PasswordInput
+          label="Password"
+          hintText="Enter Password..."
+          value={editedUserData.password}
+          setValue={(value) => {
+            handleUserDataUpdate("password", value);
+          }}
         />
         <TextInput
           label="First Name"
@@ -79,7 +91,7 @@ export default function EditDetails({ userData }) {
         <BaseButton
           text="Save Changes"
           clickHandler={(event) => handleSubmit(event)}
-        />{" "}
+        />
       </form>
     </div>
   );

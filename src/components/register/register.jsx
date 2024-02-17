@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { hebrewCities } from "../../utils/data.js";
 import "./register.css";
 
 //Components for form
@@ -59,6 +60,7 @@ export default function Register() {
   return (
     <div className="form-container">
       <form className="register-form">
+        <h2 className="form-header">Register</h2>
         {errorMessage ? (
           <div className="error-div">
             <h3 className="error-text">{errorMessage}</h3>
@@ -70,7 +72,6 @@ export default function Register() {
             registerDataUpdate("image", value);
           }}
         />
-        <h2 className="form-header">Register</h2>
 
         <TextInput
           label="Username"
@@ -133,6 +134,7 @@ export default function Register() {
           label="Enter City"
           hintText="Enter City name ..."
           value={registerData.city}
+          options={hebrewCities}
           setValue={(value) => {
             registerDataUpdate("city", value);
           }}

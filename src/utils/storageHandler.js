@@ -23,51 +23,82 @@ const saveUsers = async (users) => {
   localStorage.setItem(arrayKey, JSON.stringify(usersWithImageData));
 };
 
-export const loadUsers = async () => {
-  const usersFromLocalStorage = JSON.parse(localStorage.getItem(arrayKey));
-  if (usersFromLocalStorage) {
-    return usersFromLocalStorage;
-  } else {
+export const loadUsers = () => {
+  try {
+    const usersFromLocalStorage = JSON.parse(localStorage.getItem(arrayKey));
+    const usersArray = Array.isArray(usersFromLocalStorage)
+      ? usersFromLocalStorage
+      : [];
+    return usersArray;
+  } catch (error) {
+    console.error("Error loading users from local storage:", error);
     return [];
   }
 };
 
-export const registerUser = async (user) => {
-  const currentUser = await loadUsers();
+export const loadUser = (email, password) => {
+  const users = loadUsers();
+  const matchedUser = users.find(
+    (user) => user.email === email && user.password === password
+  );
+  return matchedUser || null;
+};
+
+const saveInSession = (savedEmail, savedPassword) => {
+  const user = { email: savedEmail, password: savedPassword };
+  sessionStorage.setItem(connectionKey, JSON.stringify(user));
+};
+
+export const registerUser = (user) => {
+  delete user.verify;
+  const currentUser = loadUsers();
   currentUser.push(user);
-  await saveUsers(currentUser);
+  saveUsers(currentUser);
   return true;
 };
 
-export const loginUser = async (email, password) => {
-  const users = await loadUsers();
+export const loginUser = (email, password) => {
+  const users = loadUsers();
   for (const user of users) {
     if (user.email === email && user.password === password) {
-      sessionStorage.setItem(connectionKey, JSON.stringify(user));
+      saveInSession(email, password);
       return true;
     }
   }
   return false;
 };
 
-export const logoutUser = async () => {
+export const logoutUser = () => {
   sessionStorage.removeItem(connectionKey);
   return true;
 };
 
-export const deleteUser = async (user) => {
-  const users = await loadUsers();
+export const deleteUser = (user) => {
+  const users = loadUsers();
   const updatedUsers = [];
+  let userDeleted = false;
   for (const currentUser of users) {
-    if (currentUser.email !== user.email) {
-      updatedUsers.push(currentUser);
+    if (!userDeleted && currentUser.email === user.email) {
+      userDeleted = true;
+      continue; // Skip this user, effectively deleting it
     }
+    updatedUsers.push(currentUser);
   }
-  await saveUsers(updatedUsers);
+  saveUsers(updatedUsers);
 };
 
 export const updateUser = async (updatedUser) => {
   await deleteUser(updatedUser);
   await registerUser(updatedUser);
-  await loginUser(updatedUser.email, updatedUser.password);
+};
+
+export const loginAsAdmin = (email, password) => {
+  const admin = { email: "admin", password: "1" };
+  if (admin.email === email) {
+    if (admin.password === password) {
+      saveInSession(email, password);
+      return true;
+    }
+  }
+  return false;
 };

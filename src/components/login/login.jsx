@@ -7,9 +7,9 @@ import TextInput from "../inputs/textInput/text-input.jsx";
 import BaseButton from "../buttons/baseButton/base-button.jsx";
 
 //Import logic
-import { loginUser } from "../../utils/storageHandler";
+import { loginAsAdmin, loginUser } from "../../utils/storageHandler";
 
-export default function Login() {
+export default function Login({ setAdmin }) {
   //State to collect information from the login form
   const [loginData, setLoginData] = useState({
     email: "",
@@ -29,43 +29,52 @@ export default function Login() {
   const handelLogin = async (event) => {
     event.preventDefault();
     setErrorMessage("");
+
+    const admin = loginAsAdmin(loginData.email, loginData.password);
+
+    if (admin) {
+      window.location.reload();
+      return;
+    }
+
     const login = await loginUser(loginData.email, loginData.password);
-    console.log(login);
     if (login) {
       window.location.reload();
     } else {
-      alert("bad");
+      setErrorMessage("Incorrect email or password. Please try again.");
     }
   };
 
   return (
     <div className="form-container">
-      <form className="login-form">
-        {errorMessage ? (
-          <div className="error-div">
-            <h3 className="error-text">{errorMessage}</h3>
-          </div>
-        ) : null}
+      <div>
         <h2 className="form-header">Login</h2>
-        <TextInput
-          label="Email"
-          hintText="Enter Email address..."
-          value={loginData.email}
-          setValue={(value) => {
-            loginDataUpdate("email", value);
-          }}
-        />
-        <PasswordInput
-          label="Password"
-          hintText="Enter Password..."
-          value={loginData.password}
-          setValue={(value) => {
-            loginDataUpdate("password", value);
-          }}
-        />
+        <form className="login-form">
+          {errorMessage ? (
+            <div className="error-div">
+              <p className="error-text">{errorMessage}</p>
+            </div>
+          ) : null}
+          <TextInput
+            label="Email"
+            hintText="Enter Email address..."
+            value={loginData.email}
+            setValue={(value) => {
+              loginDataUpdate("email", value);
+            }}
+          />
+          <PasswordInput
+            label="Password"
+            hintText="Enter Password..."
+            value={loginData.password}
+            setValue={(value) => {
+              loginDataUpdate("password", value);
+            }}
+          />
 
-        <BaseButton text="Login" clickHandler={handelLogin} />
-      </form>
+          <BaseButton text="Login" clickHandler={handelLogin} />
+        </form>
+      </div>
     </div>
   );
 }

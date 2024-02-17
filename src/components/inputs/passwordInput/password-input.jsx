@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import "./password-input.css";
 
 export default function PasswordInput({ label, hintText, value, setValue }) {
@@ -31,7 +32,11 @@ export default function PasswordInput({ label, hintText, value, setValue }) {
             onClick={toggleShowPassword}
             style={{}}
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? (
+              <MdVisibilityOff className="password-icon" />
+            ) : (
+              <MdVisibility className="password-icon" />
+            )}
           </button>
         )}
       </div>

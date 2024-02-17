@@ -4,37 +4,47 @@ import "./App.css";
 // Import Components
 import Register from "./components/register/register";
 import Login from "./components/login/login";
-import EditDetails from "./components/editDetails/edit-details";
+import Profile from "./components/profile/profile";
+import SystemAdmin from "./components/systemAdmin/system-admin";
+import { loadUser, loginAsAdmin } from "./utils/storageHandler";
 
 function App() {
   const [user, setUser] = useState(null);
   const [isBusy, setBusy] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const updateUserProfile = (updatedUserData) => {
+    setUser(updatedUserData);
+  };
 
   useEffect(() => {
-    const userData = sessionStorage.getItem("loggedInUser");
-    if (userData) {
-      const parseUser = JSON.parse(userData);
-      setUser(parseUser);
+    const userDataString = sessionStorage.getItem("loggedInUser");
+    if (userDataString) {
+      const { email, password } = JSON.parse(userDataString);
+      const admin = loginAsAdmin(email, password);
+      if (admin) {
+        setIsAdmin(true);
+      }
+
+      const userData = loadUser(email, password);
+      setUser(userData);
     }
-    // Set isBusy to false after useEffect completes
     setBusy(false);
   }, []);
 
   // Render a loading state if isBusy is true
   if (isBusy) {
-    return null;
+    return <div>Loading...</div>;
   }
 
   return (
     <div className="App">
-      {user === null ? (
-        <div>
-          <Login />
-          <Register />
-        </div>
-      ) : (
-        <EditDetails userData={user} />
+      <Login />
+      <Register />
+      {user && !isAdmin && (
+        <Profile userData={user} updateUser={updateUserProfile} />
       )}
+      {isAdmin && <SystemAdmin />}
     </div>
   );
 }

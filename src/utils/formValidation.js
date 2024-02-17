@@ -12,6 +12,11 @@ const validateUsername = (username) => {
     return "User name can only contain English letters, numbers, and special characters.";
   }
 
+  // Check if the username is "admin"
+  if (username.toLowerCase() === "admin") {
+    return "Username cannot be admin";
+  }
+
   // If the username passes all validation checks, return null
   return null;
 };
