@@ -30,7 +30,7 @@ export default function AutoCompleteInput({
     <div className="flex-item">
       <p>{label}</p>
       <input
-        style={{ width: "180px" }}
+        className="autocomplete-input"
         value={value}
         placeholder={hintText}
         onChange={handleInputChange}

@@ -51,35 +51,38 @@ export default function SystemAdmin() {
       <div className="admin-dashboard">
         <h1>Dashboard</h1>
         {users.length !== 0 ? (
-          <table>
-            <tbody>
-              <tr key={"col-names"}>
-                <td>username</td>
-                <td>full name</td>
-                <td>birthday</td>
-                <td>address</td>
-                <td>email</td>
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Birthday</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th className="button-th">Edit</th>
+                <th className="button-th">Delete</th>
               </tr>
-
+            </thead>
+            <tbody>
               {users.map((item, index) => (
                 <tr key={index}>
                   <td>{item.username}</td>
-                  <td>{`${item.firstName} ${item.lastName}`}</td>{" "}
+                  <td>{`${item.firstName} ${item.lastName}`}</td>
                   <td>{item.birthday}</td>
                   <td>{`${item.city} ${item.street} ${item.number}`}</td>
                   <td>{item.email}</td>
-                  <td>
-                    <MdEdit onClick={() => handleEdit(item)} />
+                  <td className="edit" onClick={() => handleEdit(item)}>
+                    <MdEdit />
                   </td>
-                  <td>
-                    <MdDelete onClick={() => handleDelete(item)} />
+                  <td className="delete" onClick={() => handleDelete(item)}>
+                    <MdDelete />
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         ) : (
-          <div>
+          <div className="no-users-message">
             <h2>No registered users</h2>
           </div>
         )}

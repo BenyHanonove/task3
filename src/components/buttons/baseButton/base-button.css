@@ -1,34 +1,28 @@
 .btn-container {
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+  flex: 1;
   display: flex;
-  padding: 16px;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px;
 }
 
 .base-button {
-  background-color: #457ace;
-  border: solid #e2e2e2;
-  border-radius: 1.5rem;
-  box-sizing: border-box;
-  color: #e2e2e2;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1;
-  padding: 1rem 1.6rem;
+  width: 180px;
+  background-color: #905ace;
+  border: none;
+  color: white;
+  padding: 15px 32px;
   text-align: center;
-  text-decoration: none #0d172a solid;
-  text-decoration-thickness: auto;
-  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0px 3px 6px rgba(166, 175, 195, 0.25); /* Updated shadow */
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 8px;
 }
 
 .base-button:hover {
-  background-color: #17376b;
-  color: #fff;
+  background-color: #7a3dc0;
+  color: white;
 }

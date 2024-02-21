@@ -1,3 +1,4 @@
+//Function to validate username
 const validateUsername = (username) => {
   // Check if the length of the username is between 3 and 60 characters
   if (username.length < 3 || username.length > 60) {
@@ -21,6 +22,7 @@ const validateUsername = (username) => {
   return null;
 };
 
+//Function to validate password
 const validatePassword = (password) => {
   // Check if the length of the password is between 7 and 12 characters
   if (password.length < 7 || password.length > 12) {
@@ -45,6 +47,7 @@ const validatePassword = (password) => {
   return null;
 };
 
+//Function to validate email
 const validateEmail = (email) => {
   // Regular expression for email validation with .com domain only
   const regex = /^[^\s@]+@[^\s@]+\.(?:com)$/i;
@@ -77,6 +80,7 @@ const validateBirthday = (birthday) => {
   return null;
 };
 
+//Function to validate form
 export const ValidateRegisterForm = (registerData) => {
   //Checks if a image is selected
   if (!registerData.image) {

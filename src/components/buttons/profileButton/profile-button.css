@@ -1,13 +1,13 @@
 .profile-button {
-  color: white;
-  background-color: var(--button-color);
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  color: white;
+  padding: 10px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
   cursor: pointer;
-  direction: rtl;
-}
-
-.profile-button:hover {
-  opacity: 0.8;
+  border-radius: 10px;
 }

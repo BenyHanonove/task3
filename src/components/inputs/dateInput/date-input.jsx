@@ -1,11 +1,12 @@
 import React from "react";
+import "./date-input.css";
 
 export default function DateInput({ label, value, setValue }) {
   return (
     <div className="flex-item">
       <p>{label}</p>
       <input
-        style={{ width: "180px" }}
+        className="date-input"
         type="date"
         value={value}
         onChange={(event) => {

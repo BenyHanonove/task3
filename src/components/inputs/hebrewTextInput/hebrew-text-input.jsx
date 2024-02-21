@@ -16,10 +16,10 @@ export default function HebrewTextInput({ label, hintText, value, setValue }) {
     <div className="flex-item">
       <p>{label}</p>
       <input
-        style={{ width: "180px" }}
+        className="flex-item"
         value={value}
         placeholder={hintText}
-        onChange={handleChange} // Call handleChange function on input change
+        onChange={handleChange}
       />
     </div>
   );

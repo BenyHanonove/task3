@@ -1,14 +1,49 @@
 .App {
-  display: flex;
-  flex-wrap: wrap;
+  min-height: 100vh;
+  background: linear-gradient(90deg, #8b87c4, #5ca9c0);
+  height: auto;
 }
 
-.form-container {
-  flex: 1;
-  margin: 5px;
+.auth-container {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-container {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .form-header {
-  text-align: center;
+  width: 100%;
   font-weight: 700;
+  font-size: 28px;
+  padding: 4px;
+  text-decoration: underline;
+}
+
+.error-div {
+  width: 100%;
+  padding: 10px;
+}
+
+.error-text {
+  color: #ff5555;
+  font-size: 21px;
+}
+
+.flex-item {
+  padding: 6px;
+  box-sizing: border-box;
+  width: 230px;
+  flex: 1;
+  padding: 6px;
+  box-sizing: border-box;
+  margin: 6px;
 }

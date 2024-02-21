@@ -14,7 +14,7 @@ export default function NumberInput({ label, hintText, value, setValue }) {
     <div className="flex-item">
       <p>{label}</p>
       <input
-        style={{ width: "180px" }}
+        className="flex-item"
         type="number"
         value={value}
         placeholder={hintText}

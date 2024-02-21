@@ -6,12 +6,16 @@ import Register from "./components/register/register";
 import Login from "./components/login/login";
 import Profile from "./components/profile/profile";
 import SystemAdmin from "./components/systemAdmin/system-admin";
+import Switch from "./components/buttons/switch/switch";
+
+//Import logic
 import { loadUser, loginAsAdmin } from "./utils/storageHandler";
 
 function App() {
   const [user, setUser] = useState(null);
   const [isBusy, setBusy] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isRegisterMode, setRegisterMode] = useState(false); // State to track register mode
 
   const updateUserProfile = (updatedUserData) => {
     setUser(updatedUserData);
@@ -32,6 +36,11 @@ function App() {
     setBusy(false);
   }, []);
 
+  // Function to handle toggle event from Switch component
+  const handleSwitchToggle = (isLeft) => {
+    setRegisterMode(!isLeft);
+  };
+
   // Render a loading state if isBusy is true
   if (isBusy) {
     return <div>Loading...</div>;
@@ -39,12 +48,22 @@ function App() {
 
   return (
     <div className="App">
-      <Login />
-      <Register />
-      {user && !isAdmin && (
-        <Profile userData={user} updateUser={updateUserProfile} />
-      )}
-      {isAdmin && <SystemAdmin />}
+      <Switch
+        leftText={"Login"}
+        rightText={"Register"}
+        onToggle={handleSwitchToggle}
+      />
+
+      <div className="auth-container">
+        {isRegisterMode ? <Register /> : <Login />}
+      </div>
+
+      <div className="user-container">
+        {user && !isAdmin && (
+          <Profile userData={user} updateUser={updateUserProfile} />
+        )}
+        {isAdmin && <SystemAdmin />}
+      </div>
     </div>
   );
 }

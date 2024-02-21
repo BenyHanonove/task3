@@ -19,7 +19,7 @@ export default function PasswordInput({ label, hintText, value, setValue }) {
       <p>{label}</p>
       <div style={{ position: "relative" }}>
         <input
-          style={{ width: "180px" }}
+          className="flex-item"
           value={value}
           type={showPassword ? "text" : "password"}
           placeholder={hintText}

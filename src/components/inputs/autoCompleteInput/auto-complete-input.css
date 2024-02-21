@@ -1,10 +1,21 @@
 .autocomplete-input {
-  width: 180px;
-  outline: none;
+  padding: 6px;
+  box-sizing: border-box;
+  width: 230px;
+  flex: 1;
+  padding: 6px;
+  box-sizing: border-box;
+  margin: 6px;
 }
 
 .autocomplete-options-container {
-  width: 180px;
+  padding: 6px;
+  box-sizing: border-box;
+  width: 230px;
+  flex: 1;
+  padding: 6px;
+  box-sizing: border-box;
+  margin: 6px;
   max-height: 15rem;
   overflow-y: auto;
   border: 1px solid #848586;

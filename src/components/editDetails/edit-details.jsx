@@ -14,6 +14,7 @@ import PasswordInput from "../inputs/passwordInput/password-input.jsx";
 // Function to handle user update
 import { updateUser } from "../../utils/storageHandler.js";
 import BaseButton from "../buttons/baseButton/base-button.jsx";
+import { cities } from "../../utils/data.js";
 
 export default function EditDetails({ userData, setShow, setUpdate }) {
   // State to handle edited user data
@@ -37,8 +38,8 @@ export default function EditDetails({ userData, setShow, setUpdate }) {
   };
 
   return (
-    <div className="form-container">
-      <form className="edit-profile-form" onSubmit={handleSubmit}>
+    <div className="form-container-edit">
+      <form className="edit-form" onSubmit={handleSubmit}>
         <h2 className="form-header">Edit Profile</h2>
         {/* Load user data into form inputs */}
         <ImageInput
@@ -74,6 +75,7 @@ export default function EditDetails({ userData, setShow, setUpdate }) {
           setValue={(value) => handleUserDataUpdate("birthday", value)}
         />
         <AutoCompleteInput
+          options={cities}
           label="Enter City"
           value={editedUserData.city}
           setValue={(value) => handleUserDataUpdate("city", value)}

@@ -28,7 +28,7 @@ export default function TextInput({
     <div className="flex-item">
       <p>{label}</p>
       <input
-        style={{ width: "180px" }}
+        className="flex-item"
         value={value}
         placeholder={hintText}
         onChange={handleChange}

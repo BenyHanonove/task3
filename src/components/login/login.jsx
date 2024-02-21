@@ -46,35 +46,33 @@ export default function Login({ setAdmin }) {
   };
 
   return (
-    <div className="form-container">
-      <div>
+    <div className="form-container-login">
+      <form className="login-form">
         <h2 className="form-header">Login</h2>
-        <form className="login-form">
-          {errorMessage ? (
-            <div className="error-div">
-              <p className="error-text">{errorMessage}</p>
-            </div>
-          ) : null}
-          <TextInput
-            label="Email"
-            hintText="Enter Email address..."
-            value={loginData.email}
-            setValue={(value) => {
-              loginDataUpdate("email", value);
-            }}
-          />
-          <PasswordInput
-            label="Password"
-            hintText="Enter Password..."
-            value={loginData.password}
-            setValue={(value) => {
-              loginDataUpdate("password", value);
-            }}
-          />
+        {errorMessage ? (
+          <div className="error-div">
+            <p className="error-text">{errorMessage}</p>
+          </div>
+        ) : null}
+        <TextInput
+          label="Email"
+          hintText="Enter Email address..."
+          value={loginData.email}
+          setValue={(value) => {
+            loginDataUpdate("email", value);
+          }}
+        />
+        <PasswordInput
+          label="Password"
+          hintText="Enter Password..."
+          value={loginData.password}
+          setValue={(value) => {
+            loginDataUpdate("password", value);
+          }}
+        />
 
-          <BaseButton text="Login" clickHandler={handelLogin} />
-        </form>
-      </div>
+        <BaseButton text="Login" clickHandler={handelLogin} />
+      </form>
     </div>
   );
 }
