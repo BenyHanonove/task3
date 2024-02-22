@@ -3,7 +3,7 @@ const arrayKey = "users";
 const connectionKey = "loggedInUser";
 
 //Const to handel the admin data
-const admin = { email: "admin", password: "1" };
+const admin = { email: "admin", password: "ad12343211ad" };
 
 //Function to save users array inside local storage
 const saveUsers = async (users) => {
